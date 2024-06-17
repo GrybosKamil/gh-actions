@@ -1,0 +1,30 @@
+name: context print
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+    inputs:
+      message:
+        description: "A sample input"
+        required: true
+        default: "Use workflow_dispatch to run this workflow"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      
+      - name: Dump runner context
+        run: echo '${{ toJSON(runner) }}'
+      - name: Dump GitHub context
+        run: echo '${{ toJSON(github) }}'
+      - name: Dump matrix context
+        run: echo '${{ toJSON(matrix) }}'
+      - name: Dump env context
+        run: echo '${{ toJSON(env) }}'
