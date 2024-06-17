@@ -7,10 +7,8 @@ on:
     branches: ["main"]
   workflow_dispatch:
     inputs:
-      message:
-        description: "A sample input"
-        required: true
-        default: "Use workflow_dispatch to run this workflow"
+      environment:
+        type: environment
 
 jobs:
   build:
@@ -19,7 +17,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      
       - name: Dump runner context
         run: echo '${{ toJSON(runner) }}'
       - name: Dump GitHub context
